@@ -7,7 +7,9 @@ package com.mycompany.xslttest.controller;
 
 import com.mycompany.xslttest.pojo.Cat;
 import com.mycompany.xslttest.service.TestService;
+import java.io.File;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -131,7 +133,7 @@ public class TestController {
 	}
 
 	@GetMapping("/xsltTest")
-	@ResponseBody
+//	@ResponseBody  //要輸出網頁，這個是多餘的
 	public void xsltTest(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html;charset=UTF-8");
 		try (PrintWriter out = response.getWriter()) {
@@ -146,11 +148,11 @@ public class TestController {
 			root.appendChild(cats);
 			
 			List<Cat> catList = new ArrayList<Cat>();
+			catList.add(new Cat(3L, "小花", "黑底白斑", testService.getRandomAge(15)));
 			catList.add(new Cat(1L, "小白", "黑色", testService.getRandomAge(15)));
 			catList.add(new Cat(2L, "小黑", "白色", testService.getRandomAge(15)));
-			catList.add(new Cat(3L, "小花", "黑底白斑", testService.getRandomAge(15)));
-			catList.add(new Cat(4L, "子軒", "黃色", testService.getRandomAge(15)));
 			catList.add(new Cat(5L, "冷氣遙控器", "藍色", testService.getRandomAge(15)));
+			catList.add(new Cat(4L, "子軒", "黃色", testService.getRandomAge(15)));
 			
 			for(Cat cat:catList){
 				Element catElement = document.createElement("cat");
@@ -179,6 +181,27 @@ public class TestController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@GetMapping("/pageTest")
+	@ResponseBody
+	public void pageTest(HttpServletRequest request,HttpServletResponse response){
+		try (PrintWriter writer = response.getWriter()){
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			Document document = documentBuilder.newDocument();
+			Element root = document.createElement("root");
+			document.appendChild(root);
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer(
+				new StreamSource(new File(request.getRealPath("/WEB-INF/xsl/TestPage.xsl")))
+			);
+			transformer.transform(new DOMSource(document), new StreamResult(writer));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+	
 	}
 
 }

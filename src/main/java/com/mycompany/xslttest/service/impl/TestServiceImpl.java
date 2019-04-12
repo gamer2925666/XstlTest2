@@ -16,8 +16,9 @@ import org.springframework.stereotype.Service;
 public class TestServiceImpl implements TestService{
 	@Override
 	public Integer getRandomAge(int maxAge){
-		double random = Math.random();
-		Integer age = (int)(random*maxAge)+1;
-		return age;
+//		double random = Math.random();
+//		Long age = Math.round(random*maxAge); //盡可能不要強制轉型
+		Double randomAge = new Double(Math.random()*maxAge);
+		return randomAge.intValue()+1;
 	}
 }

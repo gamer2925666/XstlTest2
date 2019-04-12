@@ -40,6 +40,6 @@
 	</bean>-->
 
 	<mvc:annotation-driven/>
-	<mvc:resources mapping="/**" location="/"/>
+	<mvc:resources mapping="/**" location="/WEB-INF/"/>
 
 </beans>

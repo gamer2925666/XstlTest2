@@ -30,7 +30,13 @@
 	</xsl:template>
 	
 	<xsl:template match="cat">
-		<p>姓名:<xsl:value-of select="name"/> 花色:<xsl:value-of select="color"/> 年齡:<xsl:value-of select="age"/></p>
+		<p>
+			ID:<xsl:value-of select="id"/> 
+			姓名:<xsl:value-of select="name"/>
+			花色:<xsl:value-of select="color"/>
+			年齡:<xsl:value-of select="age"/>
+			
+		</p>
 	</xsl:template>
 
 </xsl:stylesheet>
