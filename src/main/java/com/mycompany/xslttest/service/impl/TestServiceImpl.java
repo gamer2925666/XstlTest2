@@ -35,6 +35,9 @@ public class TestServiceImpl implements TestService{
 	
 	@Override
 	public boolean testPrimeNumber(int number) {
+                if(number==1){
+                        return false;
+                }
 		boolean isPrimeNumber = true;
 		for (int j = 1; j < number *0.7; j++) {
 			if (number % j == 0 && j != 1) {
