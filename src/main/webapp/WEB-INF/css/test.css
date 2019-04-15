@@ -1,3 +1,8 @@
-p{
-	font-size: 50px;
+
+
+table, th, td {
+        border: 1px solid black;
+}
+.isPrimeNumber {
+        color:  red;
 }

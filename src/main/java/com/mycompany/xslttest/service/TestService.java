@@ -12,4 +12,6 @@ package com.mycompany.xslttest.service;
  */
 public interface TestService {
 	Integer getRandomAge(int maxAge);
+	String getPrimeNumber(int min, int max);
+	boolean testPrimeNumber(int number);
 }

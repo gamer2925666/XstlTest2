@@ -18,7 +18,7 @@
 	<context:annotation-config/>
 	<context:component-scan base-package="com.mycompany.xslttest"/>
 
-<!--	<bean class="org.springframework.web.servlet.view.xslt.XsltViewResolver">
+	<bean class="org.springframework.web.servlet.view.xslt.XsltViewResolver">
 		<property
 			name="viewClass"
 			value="org.springframework.web.servlet.view.xslt.XsltView"
@@ -37,8 +37,8 @@
 		<property name="defaultEncoding" value="UTF-8"/>
 		<property name="maxInMemorySize" value="16777216"/>
 		<property name="maxUploadSize" value="16777216"/>
-	</bean>-->
-
+	</bean>
+	
 	<mvc:annotation-driven/>
 	<mvc:resources mapping="/**" location="/WEB-INF/"/>
 
