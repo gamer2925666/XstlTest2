@@ -39,12 +39,20 @@ public class TestController {
         @Autowired
         private TestService testService;
 
+        /**
+         * 首頁
+         * @return 
+         */
         @GetMapping("/")
         @ResponseBody
         public String indexInfo() {
                 return "welcome";
         }
-
+        /**
+         * DOM測試
+         * @param request
+         * @param response 
+         */
         @GetMapping("/fromTest")
 //	@ResponseBody
         public void xmlTest(HttpServletRequest request, HttpServletResponse response) {
@@ -130,7 +138,13 @@ public class TestController {
                 }
 
         }
-
+        /**
+         * xslt測試
+         * @param request
+         * @param response
+         * @return
+         * @throws Exception 
+         */
         @GetMapping("/xsltTest")
 //	@ResponseBody  //要輸出網頁，這個是多餘的
         public ModelAndView xsltTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -173,7 +187,12 @@ public class TestController {
                 modelAndView.addObject(root);
                 return modelAndView;
         }
-
+        /**
+         * 測試頁面
+         * @param request
+         * @param response
+         * @return 
+         */
         @GetMapping("/testPage")
         public ModelAndView pageTest(HttpServletRequest request,
                 HttpServletResponse response) {
@@ -195,7 +214,10 @@ public class TestController {
 
                 return null;
         }
-
+        /**
+         * 質數頁面
+         * @return 
+         */
         @GetMapping("/primeNumberPage")
         public ModelAndView primeNumberPage() {
                 ModelAndView modelAndView = new ModelAndView("PrimeNumbersPractice2");
@@ -216,6 +238,12 @@ public class TestController {
                 return null;
         }
 
+        /**
+         * 取得範圍內質數API
+         * @param min 範圍下限
+         * @param max 範圍上限
+         * @return 
+         */
         @GetMapping("/primeNumber")
         @ResponseBody
         public String getPrimeNumberByMinAndMax(int min, int max) {
@@ -252,7 +280,11 @@ public class TestController {
                 modelAndView.addObject(document);
                 return modelAndView;
         }
-
+        /**
+         * 九九乘法表頁面
+         * @return
+         * @throws Exception 
+         */
         @GetMapping("/multiplicationTable")
         public ModelAndView getMultiplicationTable2() throws Exception {
                 ModelAndView modelAndView = new ModelAndView("MultiplicationTable");
