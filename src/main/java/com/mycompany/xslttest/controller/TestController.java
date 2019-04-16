@@ -314,7 +314,7 @@ public class TestController {
                                 Element product = document.createElement("product");
                                 int productInt = j * i;
                                 product.setTextContent(String.valueOf(productInt));
-                                String isPrimeNumber = testService.testPrimeNumber(productInt) ? "1" : "0";
+                                String isPrimeNumber = testService.isPrimeNumber(productInt) ? "1" : "0";
 //                                System.out.println(productInt + " isPrimeNumber:" + isPrimeNumber);
                                 product.setAttribute("isPrimeNumber", isPrimeNumber);
                                 data.appendChild(product);
@@ -332,7 +332,7 @@ public class TestController {
                                 Element product = document.createElement("product");
                                 int productInt = j * i;
                                 product.setTextContent(String.valueOf(productInt));
-                                String isPrimeNumber = testService.testPrimeNumber(productInt) ? "1" : "0";
+                                String isPrimeNumber = testService.isPrimeNumber(productInt) ? "1" : "0";
 //                                System.out.println(productInt + " isPrimeNumber:" + isPrimeNumber);
                                 product.setAttribute("isPrimeNumber", isPrimeNumber);
                                 data.appendChild(product);
