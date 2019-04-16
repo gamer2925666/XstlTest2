@@ -20,6 +20,7 @@
 				<META charset="UTF-8"/>
 				<META name="viewport" content="width=device-width, initial-scale=1.0"/>
 				<TITLE>Prime Numbers 练习</TITLE>
+                                <SCRIPT type="text/javascript" src="js/jquery-3.4.0.min.js"></SCRIPT>
 			</HEAD>
 			<BODY>
 				<FIELDSET>

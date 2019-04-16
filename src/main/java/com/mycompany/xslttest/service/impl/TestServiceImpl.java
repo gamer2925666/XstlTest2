@@ -35,12 +35,14 @@ public class TestServiceImpl implements TestService {
         }
 
         @Override
-        public boolean isPrimeNumber(int number) {
-                if (number == 1) {
+        public boolean isPrimeNumber(Integer number) {
+                if (number <= 1) {
                         return false;
                 }
+                //一個數的其中一個因數，不會大於開根號，檢測至開根號即可
+                Double numberSqrt = Math.sqrt(number.doubleValue());
                 boolean isPrimeNumber = true;
-                for (int j = 2; j < number * 0.7; j++) {
+                for (int j = 2; j <= numberSqrt.intValue(); j++) {
                         if (number % j == 0) {
                                 isPrimeNumber = false;
                                 break;

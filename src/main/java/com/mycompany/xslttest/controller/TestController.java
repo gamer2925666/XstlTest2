@@ -19,6 +19,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -41,17 +43,20 @@ public class TestController {
 
         /**
          * 首頁
-         * @return 
+         *
+         * @return
          */
         @GetMapping("/")
         @ResponseBody
         public String indexInfo() {
                 return "welcome";
         }
+
         /**
          * DOM測試
+         *
          * @param request
-         * @param response 
+         * @param response
          */
         @GetMapping("/fromTest")
 //	@ResponseBody
@@ -138,12 +143,14 @@ public class TestController {
                 }
 
         }
+
         /**
          * xslt測試
+         *
          * @param request
          * @param response
          * @return
-         * @throws Exception 
+         * @throws Exception
          */
         @GetMapping("/xsltTest")
 //	@ResponseBody  //要輸出網頁，這個是多餘的
@@ -187,11 +194,13 @@ public class TestController {
                 modelAndView.addObject(root);
                 return modelAndView;
         }
+
         /**
          * 測試頁面
+         *
          * @param request
          * @param response
-         * @return 
+         * @return
          */
         @GetMapping("/testPage")
         public ModelAndView pageTest(HttpServletRequest request,
@@ -214,9 +223,11 @@ public class TestController {
 
                 return null;
         }
+
         /**
          * 質數頁面
-         * @return 
+         *
+         * @return
          */
         @GetMapping("/primeNumberPage")
         public ModelAndView primeNumberPage() {
@@ -240,15 +251,26 @@ public class TestController {
 
         /**
          * 取得範圍內質數API
+         *
          * @param min 範圍下限
          * @param max 範圍上限
-         * @return 
+         * @return
          */
         @GetMapping("/primeNumber")
         @ResponseBody
         public String getPrimeNumberByMinAndMax(int min, int max) {
                 return testService.getPrimeNumber(min, max);
         }
+        
+//        @GetMapping("/cat")
+//        @ResponseBody
+//        public List<Cat> getCat(){
+//                List<Cat> cats = new ArrayList<>();
+//                for(int i =0; i<100; i++){
+//                        cats.add(new Cat(new Long(String.valueOf(i)), "cat"+i, "black", testService.getRandomAge(15)));
+//                }
+//                return cats;
+//        }
 
 //	@GetMapping("/multiplicationTable")
         public ModelAndView getMultiplicationTable() throws Exception {
@@ -280,10 +302,12 @@ public class TestController {
                 modelAndView.addObject(document);
                 return modelAndView;
         }
+
         /**
          * 九九乘法表頁面
+         *
          * @return
-         * @throws Exception 
+         * @throws Exception
          */
         @GetMapping("/multiplicationTable")
         public ModelAndView getMultiplicationTable2() throws Exception {
@@ -309,11 +333,15 @@ public class TestController {
                                 Element data = document.createElement("data");
                                 row.appendChild(data);
                                 Element formula = document.createElement("formula");
-                                formula.setTextContent(j + " x " + i + " = ");
+//                                formula.setTextContent(j + " x " + i + " = ");
+                                Node formulaTextNode = document.createTextNode(j + " x " + i + " = ");
+                                formula.appendChild(formulaTextNode);
                                 data.appendChild(formula);
                                 Element product = document.createElement("product");
                                 int productInt = j * i;
-                                product.setTextContent(String.valueOf(productInt));
+//                                product.setTextContent(String.valueOf(productInt));
+                                Node productTextNode = document.createTextNode(String.valueOf(productInt));
+                                product.appendChild(productTextNode);
                                 String isPrimeNumber = testService.isPrimeNumber(productInt) ? "1" : "0";
 //                                System.out.println(productInt + " isPrimeNumber:" + isPrimeNumber);
                                 product.setAttribute("isPrimeNumber", isPrimeNumber);
@@ -327,11 +355,15 @@ public class TestController {
                                 Element data = document.createElement("data");
                                 row.appendChild(data);
                                 Element formula = document.createElement("formula");
-                                formula.setTextContent(j + " x " + i + " = ");
+//                                formula.setTextContent(j + " x " + i + " = ");
+                                Node formulaTextNode = document.createTextNode(j + " x " + i + " = ");
+                                formula.appendChild(formulaTextNode);
                                 data.appendChild(formula);
                                 Element product = document.createElement("product");
                                 int productInt = j * i;
-                                product.setTextContent(String.valueOf(productInt));
+//                                product.setTextContent(String.valueOf(productInt));
+                                Node productTextNode = document.createTextNode(String.valueOf(productInt));
+                                product.appendChild(productTextNode);
                                 String isPrimeNumber = testService.isPrimeNumber(productInt) ? "1" : "0";
 //                                System.out.println(productInt + " isPrimeNumber:" + isPrimeNumber);
                                 product.setAttribute("isPrimeNumber", isPrimeNumber);

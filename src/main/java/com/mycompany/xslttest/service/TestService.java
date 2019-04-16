@@ -31,5 +31,5 @@ public interface TestService {
          * @param number 待檢測數字
          * @return 是否為質數
          */
-	boolean isPrimeNumber(int number);
+	boolean isPrimeNumber(Integer number);
 }
