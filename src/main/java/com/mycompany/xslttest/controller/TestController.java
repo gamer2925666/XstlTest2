@@ -9,7 +9,9 @@ import com.mycompany.xslttest.pojo.Cat;
 import com.mycompany.xslttest.service.TestService;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 import javafx.util.converter.NumberStringConverter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +42,8 @@ public class TestController {
 
         @Autowired
         private TestService testService;
+
+        private static final Logger LOG = Logger.getLogger(TestController.class.getName());
 
         /**
          * 首頁
@@ -261,16 +265,16 @@ public class TestController {
         public String getPrimeNumberByMinAndMax(int min, int max) {
                 return testService.getPrimeNumber(min, max);
         }
-        
-//        @GetMapping("/cat")
-//        @ResponseBody
-//        public List<Cat> getCat(){
-//                List<Cat> cats = new ArrayList<>();
-//                for(int i =0; i<100; i++){
-//                        cats.add(new Cat(new Long(String.valueOf(i)), "cat"+i, "black", testService.getRandomAge(15)));
-//                }
-//                return cats;
-//        }
+
+        @GetMapping("/cat")
+        @ResponseBody
+        public List<Cat> getCat() {
+                List<Cat> cats = new ArrayList<>();
+                for (int i = 0; i < 100; i++) {
+                        cats.add(new Cat(new Long(String.valueOf(i)), "cat" + i, "black", testService.getRandomAge(15), Calendar.getInstance().getTime()));
+                }
+                return cats;
+        }
 
 //	@GetMapping("/multiplicationTable")
         public ModelAndView getMultiplicationTable() throws Exception {

@@ -5,6 +5,10 @@
  */
 package com.mycompany.xslttest.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author COSH
@@ -14,17 +18,27 @@ public class Cat {
 	public Cat() {
 	}
 
-	public Cat(Long id, String name, String color, Integer age) {
+	public Cat(Long id, String name, String color, Integer age, Date time) {
 		this.id = id;
 		this.name = name;
 		this.color = color;
 		this.age = age;
+                this.time = time;
+	}
+        public Cat(Long id, String name, String color, Integer age) {
+		this.id = id;
+		this.name = name;
+		this.color = color;
+		this.age = age;
+                this.time = Calendar.getInstance().getTime();
 	}
 	
 	private Long id;
 	private String name;
 	private String color;
 	private Integer age;
+        @JsonFormat(timezone = "GMT+8",pattern = "yyyy/MM/dd HH:mm:ss")
+        private Date time;
 
 	public Long getId() {
 		return id;
@@ -57,4 +71,14 @@ public class Cat {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+
+        public Date getTime() {
+                return time;
+        }
+
+        public void setTime(Date time) {
+                this.time = time;
+        }
+        
+        
 }
