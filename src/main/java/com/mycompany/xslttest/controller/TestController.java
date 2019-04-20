@@ -7,12 +7,16 @@ package com.mycompany.xslttest.controller;
 
 import com.mycompany.xslttest.pojo.Cat;
 import com.mycompany.xslttest.service.TestService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
+
 import javafx.util.converter.NumberStringConverter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
@@ -21,6 +25,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +39,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- *
  * @author COSH
  */
 @Controller
@@ -208,7 +213,7 @@ public class TestController {
          */
         @GetMapping("/testPage")
         public ModelAndView pageTest(HttpServletRequest request,
-                HttpServletResponse response) {
+                                     HttpServletResponse response) {
                 ModelAndView modelAndView = new ModelAndView("TestPage");
                 try {
                         DocumentBuilderFactory documentBuilderFactory
@@ -276,7 +281,7 @@ public class TestController {
                 return cats;
         }
 
-//	@GetMapping("/multiplicationTable")
+        //	@GetMapping("/multiplicationTable")
         public ModelAndView getMultiplicationTable() throws Exception {
                 ModelAndView modelAndView = new ModelAndView("MultiplicationTable");
                 DocumentBuilderFactory documentBuilderFactory
@@ -377,6 +382,56 @@ public class TestController {
 
                 modelAndView.addObject(document);
                 return modelAndView;
+        }
+
+        @GetMapping("/multiplicationTable2")
+        public ModelAndView getMultiplicationTable3() throws Exception {
+                ModelAndView modelAndView = new ModelAndView("MultiplicationTable2");
+                Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+                document.appendChild(document.createElement("root"));
+                modelAndView.addObject(document);
+                return modelAndView;
+        }
+
+        @GetMapping(value = "/multiplicationJson",produces = "application/json")
+        @ResponseBody
+        public String getMultiplicationJson() {
+                JSONObject rootObject = new JSONObject();
+                JSONArray jsonArray = new JSONArray();
+                IntStream intStream = IntStream.range(1, 10);
+
+
+                intStream.forEach(ans -> {
+                        IntStream intStream1 = IntStream.range(2, 6);
+                        JSONArray row  = new JSONArray();
+                        intStream1.forEach(ans2 -> {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("formula", ans + " x " + ans2 + " = ");
+                                int productInt = ans * ans2;
+                                jsonObject.put("product", productInt);
+                                jsonObject.put("isPrimeNumber",testService.isPrimeNumber(productInt));
+                                row.put(jsonObject);
+                        });
+                        jsonArray.put(row);
+                });
+                intStream = IntStream.range(1, 10);
+                intStream.forEach(ans -> {
+                        IntStream intStream2 = IntStream.range(6, 10);
+                        JSONArray row  = new JSONArray();
+                        intStream2.forEach(ans2 -> {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("formula", ans + " x " + ans2 + " = ");
+                                int productInt = ans * ans2;
+                                jsonObject.put("product", productInt);
+                                jsonObject.put("isPrimeNumber",testService.isPrimeNumber(productInt));
+                                row.put(jsonObject);
+                        });
+                        jsonArray.put(row);
+
+                });
+
+                rootObject.put("rows", jsonArray);
+                return rootObject.toString();
         }
 
 }
