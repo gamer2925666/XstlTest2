@@ -49,7 +49,6 @@ public class TestController {
         private TestService testService;
 
         private static final Logger LOG = Logger.getLogger(TestController.class.getName());
-
         /**
          * 首頁
          *
@@ -213,7 +212,7 @@ public class TestController {
          */
         @GetMapping("/testPage")
         public ModelAndView pageTest(HttpServletRequest request,
-                                     HttpServletResponse response) {
+                HttpServletResponse response) {
                 ModelAndView modelAndView = new ModelAndView("TestPage");
                 try {
                         DocumentBuilderFactory documentBuilderFactory
@@ -393,45 +392,94 @@ public class TestController {
                 return modelAndView;
         }
 
-        @GetMapping(value = "/multiplicationJson",produces = "application/json")
+        @GetMapping(value = "/multiplicationJson", produces = "application/json")
         @ResponseBody
         public String getMultiplicationJson() {
                 JSONObject rootObject = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
                 IntStream intStream = IntStream.range(1, 10);
 
-
                 intStream.forEach(ans -> {
-                        IntStream intStream1 = IntStream.range(2, 6);
-                        JSONArray row  = new JSONArray();
-                        intStream1.forEach(ans2 -> {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("formula", ans + " x " + ans2 + " = ");
-                                int productInt = ans * ans2;
-                                jsonObject.put("product", productInt);
-                                jsonObject.put("isPrimeNumber",testService.isPrimeNumber(productInt));
-                                row.put(jsonObject);
-                        });
-                        jsonArray.put(row);
+                        jsonArray.put(multiplicationByRangeAndAns(2, 6, ans));
+
                 });
                 intStream = IntStream.range(1, 10);
                 intStream.forEach(ans -> {
-                        IntStream intStream2 = IntStream.range(6, 10);
-                        JSONArray row  = new JSONArray();
-                        intStream2.forEach(ans2 -> {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("formula", ans + " x " + ans2 + " = ");
-                                int productInt = ans * ans2;
-                                jsonObject.put("product", productInt);
-                                jsonObject.put("isPrimeNumber",testService.isPrimeNumber(productInt));
-                                row.put(jsonObject);
-                        });
-                        jsonArray.put(row);
-
+                        jsonArray.put(multiplicationByRangeAndAns(6, 10, ans));
                 });
 
                 rootObject.put("rows", jsonArray);
                 return rootObject.toString();
+        }
+
+        private JSONArray multiplicationByRangeAndAns(int min, int max, int ans) {
+                IntStream intStream2 = IntStream.range(min, max);
+                JSONArray row = new JSONArray();
+                intStream2.forEach(ans2 -> {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("formula", ans + " x " + ans2 + " = ");
+                        int productInt = ans * ans2;
+                        jsonObject.put("product", productInt);
+                        jsonObject.put("isPrimeNumber", testService.isPrimeNumber(productInt));
+                        row.put(jsonObject);
+                });
+                return row;
+        }
+
+        @GetMapping("/testPage1")
+        public ModelAndView getTestPage1() throws Exception {
+                ModelAndView modelAndView = new ModelAndView("TestPage1");
+                Document document = DocumentBuilderFactory.newInstance().
+                        newDocumentBuilder().newDocument();
+                Element root = document.createElement("root");
+                document.appendChild(root);
+
+                Element picture = document.createElement("picture");
+                root.appendChild(picture);
+                Node pictureUrlNode = document.createTextNode("image/CAT.jpg");
+                picture.appendChild(pictureUrlNode);
+
+                Element introduction = document.createElement("introduction");
+                root.appendChild(introduction);
+                Node introductionTextNode = document.createTextNode("吧拉吧拉吧拉吧啦");
+                introduction.appendChild(introductionTextNode);
+
+                Element educations = document.createElement("educations");
+                root.appendChild(educations);
+
+                Element education1 = document.createElement("education");
+                educations.appendChild(education1);
+                Element educationLevel1 = document.createElement("educationLevel");
+                education1.appendChild(educationLevel1);
+                Node educationLevel1TextNode = document.createTextNode("碩士");
+                educationLevel1.appendChild(educationLevel1TextNode);
+                Element department1 = document.createElement("department");
+                education1.appendChild(department1);
+                Node department1TextNode = document.createTextNode("海洋研究所碩士班");
+                department1.appendChild(department1TextNode);
+                Element school1 = document.createElement("school");
+                education1.appendChild(school1);
+                Node school1TextNode = document.createTextNode("台灣大學");
+                school1.appendChild(school1TextNode);
+
+                Element education2 = document.createElement("education");
+                educations.appendChild(education2);
+                Element educationLevel2 = document.createElement("educationLevel");
+                education2.appendChild(educationLevel2);
+                Node educationLevel2TextNode = document.createTextNode("學士");
+                educationLevel2.appendChild(educationLevel2TextNode);
+                Element department2 = document.createElement("department");
+                education2.appendChild(department2);
+                Node department2TextNode = document.createTextNode("哲學系");
+                department2.appendChild(department2TextNode);
+                Element school2 = document.createElement("school");
+                education2.appendChild(school2);
+                Node school2TextNode = document.createTextNode("台灣大學");
+                school2.appendChild(school2TextNode);
+
+
+                modelAndView.addObject(document);
+                return modelAndView;
         }
 
 }

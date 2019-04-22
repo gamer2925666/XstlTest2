@@ -71,11 +71,6 @@
                         <version>1.0.0</version>
                 </dependency>
                 <dependency>
-                        <groupId>com.fasterxml.jackson.jr</groupId>
-                        <artifactId>jackson-jr-all</artifactId>
-                        <version>2.9.8</version>
-                </dependency>
-                <dependency>
                         <groupId>com.fasterxml.jackson.core</groupId>
                         <artifactId>jackson-annotations</artifactId>
                         <version>2.9.8</version>
@@ -96,6 +91,16 @@
                         <artifactId>spring-security-config</artifactId>
                         <version>${org.springframework.security.version}</version>
                 </dependency>-->
+                <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-core</artifactId>
+                        <version>2.9.8</version>
+                </dependency>
+                <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                        <version>2.9.8</version>
+                </dependency>
         </dependencies>
         <repositories>
                 <repository>
@@ -104,6 +109,27 @@
                 </repository>
         </repositories>
 
+
+        <!--        tomcat8插件的maven庫-->
+        <pluginRepositories>
+                <pluginRepository>
+                        <id>alfresco-public</id>
+                        <url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+                </pluginRepository>
+                <pluginRepository>
+                        <id>alfresco-public-snapshots</id>
+                        <url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
+                        <snapshots>
+                                <enabled>true</enabled>
+                                <updatePolicy>daily</updatePolicy>
+                        </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                        <id>beardedgeeks-releases</id>
+                        <url>http://beardedgeeks.googlecode.com/svn/repository/releases</url>
+                </pluginRepository>
+        </pluginRepositories>
+
         <build>
                 <plugins>
                         <plugin>
@@ -111,8 +137,8 @@
                                 <artifactId>maven-compiler-plugin</artifactId>
                                 <version>3.1</version>
                                 <configuration>
-                                        <source>1.7</source>
-                                        <target>1.7</target>
+                                        <source>1.8</source>
+                                        <target>1.8</target>
                                         <compilerArguments>
                                                 <endorseddirs>${endorsed.dir}</endorseddirs>
                                         </compilerArguments>
@@ -150,6 +176,22 @@
                                                 </configuration>
                                         </execution>
                                 </executions>
+                        </plugin>
+                        <!--                        tomcat plugin用來使社區板IDEA可以直接執行專案-->
+                        <plugin>
+                                <!--                                <groupId>org.apache.tomcat.maven</groupId>-->
+                                <!--                                <artifactId>tomcat7-maven-plugin</artifactId>-->
+                                <!--                                <version>2.1</version>-->
+                                <groupId>org.apache.tomcat.maven</groupId>
+                                <artifactId>tomcat8-maven-plugin</artifactId>
+                                <version>3.0-r1655215</version>
+                                <configuration>
+                                        <port>9090</port>
+                                        <path>/</path>
+                                        <uriEncoding>UTF-8</uriEncoding>
+                                        <!--                                        <server>tomcat7</server>-->
+                                        <server>tomcat8</server>
+                                </configuration>
                         </plugin>
                 </plugins>
         </build>

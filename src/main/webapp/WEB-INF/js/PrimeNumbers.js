@@ -18,14 +18,15 @@
 $("document").ready(function () {
         $("#submit").click(function (e) {
                 e.preventDefault();
-                var min = Number($("#minimum").val());
-                var max = Number($("#maximum").val());
+                var min = Number($("INPUT[name='minimum']").val());
+                var max = Number($("INPUT[name='maximum']").val());
                 if (min === 0 || max === 0) {
                         alert("請輸入合法數字!");
                         return;
                 }
-                var parameter = "min=" + min + "&max=" + max;
-                $.get("/primeNumber?" + parameter, function (data, status) {
+//                var parameter = "min=" + min + "&max=" + max;
+                var parameter = {min: min, max: max};
+                $.get("/primeNumber", parameter, function (data, status) {
                         if (status === "success") {
                                 $("#textArea").text(data);
                         } else {

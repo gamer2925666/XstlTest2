@@ -18,14 +18,14 @@
                 <html>
                         <head>
                                 <title>MultiplicationTable.xsl</title>
-                                <link type="text/css" rel="stylesheet" href="/css/test.css"/>
-                                <SCRIPT type="text/javascript" src="/js/jquery-3.4.0.min.js"></SCRIPT>
+                                <link type="text/css" rel="stylesheet" href="css/test.css"/>
+                                <SCRIPT type="text/javascript" src="js/jquery-3.4.0.min.js"></SCRIPT>
                         </head>
                         <body>
                                 <TABLE id="table">
 
                                 </TABLE>
-                                <SCRIPT type="text/javascript" src="/js/MultiplicationTable.js"></SCRIPT>
+                                <SCRIPT type="text/javascript" src="js/MultiplicationTable.js"></SCRIPT>
                         </body>
                 </html>
         </xsl:template>

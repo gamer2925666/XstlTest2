@@ -1,0 +1,22 @@
+img {
+    display:inline;
+}
+.title{
+    float:left;
+}
+.clear{
+    clear: left;
+}
+UL{
+    list-style:none;
+
+}
+UL LI{
+    display:inline;
+    padding-left:10px;
+}
+.listDiv{
+    border: 1px black solid;
+    margin-bottom: 5px;
+    margin-top:5px;
+}

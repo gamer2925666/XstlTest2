@@ -18,7 +18,7 @@
                 <html>
                         <head>
                                 <title>MultiplicationTable.xsl</title>
-                                <link type="text/css" rel="stylesheet" href="/css/test.css"/>
+                                <link type="text/css" rel="stylesheet" href="css/test.css"/>
                         </head>
                         <body>
                                 <TABLE>
@@ -31,7 +31,7 @@
                                                                                 <SPAN>
                                                                                         <xsl:value-of select="formula"/>
                                                                                 </SPAN>
-<!--                                                                                <xsl:choose>
+                                                                                <!--                                                                                <xsl:choose>
                                                                                         <xsl:when test="product/@isPrimeNumber = 1">
                                                                                                 <SPAN class="isPrimeNumber">
                                                                                                         <xsl:value-of select="product"/>

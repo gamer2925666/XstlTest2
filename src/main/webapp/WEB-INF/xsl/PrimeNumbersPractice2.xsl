@@ -33,13 +33,13 @@
 										<LABEL for="minimum">Minimum</LABEL>
 									</TH>
 									<TD>
-										<INPUT id="minimum" name="minimum" required="" type="number"></INPUT>
+										<INPUT  name="minimum" required="" type="number"></INPUT>
 									</TD>
 									<TH>
 										<LABEL for="maximum">Maximum</LABEL>
 									</TH>
 									<TD>
-										<INPUT id="maximum" name="maximum" required="" type="number"></INPUT>
+										<INPUT  name="maximum" required="" type="number"></INPUT>
 									</TD>
 								</TR>
 							</TBODY>
